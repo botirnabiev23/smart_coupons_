@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_coupons/db/app_database.dart';
 import 'package:smart_coupons/pages/coupons/coupons_page.dart';
 import 'package:smart_coupons/pages/categories/widgets/categories_bottom_sheet_widget.dart';
@@ -27,7 +28,7 @@ class CategoriesItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
+            MaterialWithModalsPageRoute(
               builder: (BuildContext context) => CouponsPage(
                 categoryId: couponCategory.id,
                 title: couponCategory.title,

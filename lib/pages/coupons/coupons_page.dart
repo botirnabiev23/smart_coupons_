@@ -63,14 +63,16 @@ class _CouponsPageBodyState extends State<CouponsPageBody> {
         navigationBar: CupertinoNavigationBar(
           previousPageTitle: 'Back',
           middle: Text(widget.title),
-          trailing: IconButton(
+          trailing: CupertinoButton(
+            padding: EdgeInsets.zero,
             onPressed: () => showCouponAddBottomSheet(
               context,
               widget.categoryId,
             ),
-            icon: Icon(
+            child: Icon(
               CupertinoIcons.add,
               color: primaryColor,
+              size: 24,
             ),
           ),
         ),

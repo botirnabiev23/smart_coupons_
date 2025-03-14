@@ -133,7 +133,8 @@ class _AddOrEditCouponPageState extends State<AddOrEditCouponPage> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            trailing: TextButton(
+            trailing: CupertinoButton(
+              padding: EdgeInsets.zero,
               onPressed: () async {
                 if (_isEdit) {
                   if (_isViewOnly) {
@@ -293,11 +294,12 @@ class _AddOrEditCouponPageState extends State<AddOrEditCouponPage> {
                                 fillColor: primaryColor.withOpacity(0.05),
                                 suffixIcon: _isViewOnly
                                     ? null
-                                    : IconButton(
+                                    : CupertinoButton(
+                                        padding: EdgeInsets.zero,
                                         onPressed: () => setState(() {
                                           _imageUrlController.clear();
                                         }),
-                                        icon: Icon(
+                                        child: Icon(
                                           CupertinoIcons.clear,
                                           color: primaryColor,
                                         ),
@@ -321,18 +323,18 @@ class _AddOrEditCouponPageState extends State<AddOrEditCouponPage> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                if(_isViewOnly == false)
-                                Positioned(
-                                  top: 10,
-                                  right: 10,
-                                  child: CustomBox(
-                                    onPressed: () {
-                                      setState(() {
-                                        _image = null;
-                                      });
-                                    },
+                                if (_isViewOnly == false)
+                                  Positioned(
+                                    top: 10,
+                                    right: 10,
+                                    child: CustomBox(
+                                      onPressed: () {
+                                        setState(() {
+                                          _image = null;
+                                        });
+                                      },
+                                    ),
                                   ),
-                                ),
                               ],
                             ),
                           ],
@@ -375,31 +377,19 @@ class _AddOrEditCouponPageState extends State<AddOrEditCouponPage> {
                     ),
                   ),
                   if (_isEdit) ...[
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        elevation: WidgetStateProperty.all(0),
-                        foregroundColor: WidgetStateProperty.all(
-                          Color(0xffE40000),
-                        ),
-                        backgroundColor: WidgetStateProperty.all(
-                          Color(0xffE40000).withOpacity(0.05),
-                        ),
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                      ),
+                    CupertinoButton(
+                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Adjust padding as needed
+                      color: const Color(0xffE40000).withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(8),
                       onPressed: () async {
-                        final bool? deleteConfirmed =
-                            await showDeleteDialog(context);
+                        final bool? deleteConfirmed = await showDeleteDialog(context);
                         if (deleteConfirmed == true) {
                           context.read<CouponBloc>().add(
-                                DeleteCoupon(
-                                  categoryId: widget.categoryId!,
-                                  couponId: widget.existingCoupon!.id,
-                                ),
-                              );
+                            DeleteCoupon(
+                              categoryId: widget.categoryId!,
+                              couponId: widget.existingCoupon!.id,
+                            ),
+                          );
                           Navigator.of(context).pop();
                         }
                       },
@@ -407,9 +397,12 @@ class _AddOrEditCouponPageState extends State<AddOrEditCouponPage> {
                         'Delete Coupon',
                         style: TextStyle(
                           fontSize: 16,
+                          color: const Color(0xffE40000),
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
+
                     const Gap(82),
                   ],
                 ],
